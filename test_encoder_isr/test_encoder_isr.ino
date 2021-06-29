@@ -5,10 +5,9 @@ BlynkTimer timer;
 //defenizione wifi e blynk
 char auth[] = "iGWUmQ9TEi-0bPVPxMf76sfcHKNkTC4X";
 
-char ssid[] = "G-SKY";
-char pass[] = "Famiglia1Gambera";
-//char ssid[] = "C_SKYWIFI";
-//char pass[] = "Cesaroni2.0";
+char ssid[] = "";
+char pass[] = "";
+
 
 // MOTORE
 int ENB = 4; // Pin motore pwm
