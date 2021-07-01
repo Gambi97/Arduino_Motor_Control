@@ -1,12 +1,14 @@
-#include <SPI.h>
+#define BLYNK_PRINT Serial
+
 #include <ESP8266WiFi.h>
 #include <BlynkSimpleEsp8266.h>
+
 BlynkTimer timer;
 //defenizione wifi e blynk
-char auth[] = "iGWUmQ9TEi-0bPVPxMf76sfcHKNkTC4X";
+char auth[] = "DPk4gcsCcAsoN6khYhkVZvLiDNv_hYSe";
 
-char ssid[] = "";
-char pass[] = "";
+char ssid[] = "G-SKY";
+char pass[] = "Famiglia1Gambera";
 
 
 // MOTORE
@@ -15,8 +17,8 @@ int IN3 = 0;
 int IN4 = 2;
 
 // ENCODER
-int encoderPinA = 14; 
-int encoderPinB = 12; 
+int encoderPinA = 12; 
+int encoderPinB = 14; 
 int countA = 0;
 int countB = 0;
 int protectedCount = 0;
@@ -59,8 +61,8 @@ void sendvalue(){
 void setup() {
 
   // Blink setup
-  Blynk.begin(auth,ssid,pass);
   Serial.begin(9600);
+  Blynk.begin(auth,ssid,pass);
   timer.setInterval(800L, sendvalue);
   // set all the motor control pins to outputs
   pinMode(ENB, OUTPUT);
@@ -99,14 +101,14 @@ void loop() {
   Serial.print("Riferimento: ");Serial.print(riferimento);Serial.print(" ");
   Serial.print("Azione Controllo: ");Serial.print(u);Serial.println();
   
-  /*
+  
   if ( millis() > 15000){
     riferimento = 359;
   }
   if (millis() > 25000){
     riferimento = 220;
   }
-  */
+  
   
   }
   

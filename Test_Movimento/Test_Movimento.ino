@@ -1,25 +1,35 @@
 #include <ESP8266WiFi.h>
+
 /* ---------------- MOTORE ----------------- */
 // Pin motore pwm
-uint8_t enA = 5; 
+int enA = 4; 
 // Pins motore per rotazione
 // in1 = HIGH -> Antiorario, in2 = HIGH -> Orario
-uint8_t in1 = 4;
-uint8_t in2 = 16;
+int in1 = 0;
+int in2 = 2;
+int flag = 1;
+void avviamentoMotore(){
+  if (flag == 1){ 
+    analogWrite(enA, 255);
+    digitalWrite(in1, HIGH);
+    digitalWrite(in2, LOW);
+    flag = 0;
+  } 
+}
 /* ------------------------------------------ */
 
 void setup() {
   
   // Definizione come outpu dei pin collegati a L296N
+  Serial.begin(9600);
   pinMode(enA, OUTPUT);
   pinMode(in1, OUTPUT);
   pinMode(in2, OUTPUT);
-  analogWrite(enA, 150);
-  digitalWrite(in1, LOW);
-  digitalWrite(in2, HIGH);
+  
 }
 
 void loop() {
+  avviamentoMotore();
   
   
 

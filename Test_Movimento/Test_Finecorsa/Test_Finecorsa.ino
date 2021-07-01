@@ -9,16 +9,23 @@ uint8_t in2 = 2;
 // Carattersitiche del motore
 const float riduzione = 600.0;
 const float imp_giro = 11.0;
-float pos = 0;
+int pos = 0;
+int pos_1 = 0;
+int pos_2 = 0;
+float fc_sx;
+int fc_dx;
 int flag = 1;
+int i = 0;
 void avviamentoMotore(){
   if (flag == 1){ 
-    analogWrite(enA, 90);
+    analogWrite(enA, 120);
     digitalWrite(in1, LOW);
     digitalWrite(in2, HIGH);
     flag = 0;
   } 
 }
+
+ 
 /* -------------------------------------------- */
 //////////////////////////////////////////////////
 /* ---------------- ENCODER ------------------- */
@@ -51,10 +58,45 @@ void setup() {
 
 void loop() {
   avviamentoMotore();
+  
   pos = 360.0*countA/(imp_giro*riduzione);
-  if (pos >= 360){
+  Serial.print("Posizione: "); Serial.print(pos); Serial.print(", ");Serial.print("Posizione_1: ");Serial.print(pos_1); Serial.print(", ");Serial.print("Posizione_2: ");Serial.print(pos_2);Serial.print(", ");Serial.print("i: ");Serial.println(i);
+  if (abs(pos) >= 360){
     countA = 0;
+  } 
+  
+  if ((!isnan(fc_sx)) && (!isnan(fc_dx))){
+  if (pos == pos_1){
+    i++;
+    if (pos_1 != pos_2){
+    i = 0;
+    }
+    if (i == 50){
+      if (pos >= 0){
+        fc_sx = pos;
+        analogWrite(enA, 0);
+        Serial.print("fc_sx: ");Serial.println(fc_sx);
+        digitalWrite(in1, LOW);
+        digitalWrite(in2, HIGH);
+        delay(10000);  
+        analogWrite(enA, 120);
+        i=0;
+      } else {
+        fc_dx = pos;
+        analogWrite(enA, 0);
+        Serial.print("fc_dx: ");Serial.println(fc_dx);
+        digitalWrite(in1, HIGH);
+        digitalWrite(in2, LOW);
+        delay(10000);
+        analogWrite(enA, 120);
+        i=0;
+      }    
+    }
   }
-  Serial.print("Posizione: ");Serial.println(pos);
+}
+
+  pos_2 = pos_1;
+  pos_1 = pos;
+  
   
 }
