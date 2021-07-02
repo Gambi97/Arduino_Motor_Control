@@ -12,6 +12,7 @@ const float imp_giro = 11.0;
 int pos = 0;
 int pos_1 = 0;
 int pos_2 = 0;
+int giro = 0;
 float fc_sx;
 int fc_dx;
 int flag = 1;
@@ -72,14 +73,15 @@ void loop() {
     i = 0;
     }
     if (i == 50){
-      if (pos >= 0){
+      if (giro == 0){
         fc_sx = pos;
         analogWrite(enA, 0);
         Serial.print("fc_sx: ");Serial.println(fc_sx);
         digitalWrite(in1, LOW);
         digitalWrite(in2, HIGH);
-        delay(10000);  
+        delay(5000);  
         analogWrite(enA, 120);
+        giro = 1;
         i=0;
       } else {
         fc_dx = pos;
@@ -87,9 +89,10 @@ void loop() {
         Serial.print("fc_dx: ");Serial.println(fc_dx);
         digitalWrite(in1, HIGH);
         digitalWrite(in2, LOW);
-        delay(10000);
+        delay(5 000);
         analogWrite(enA, 120);
         i=0;
+        giro = 0;
       }    
     }
   }
