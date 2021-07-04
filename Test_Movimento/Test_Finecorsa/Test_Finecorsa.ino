@@ -19,7 +19,7 @@ int flag = 1;
 int i = 0;
 void avviamentoMotore(){
   if (flag == 1){ 
-    analogWrite(enA, 120);
+    analogWrite(enA, 40);
     digitalWrite(in1, LOW);
     digitalWrite(in2, HIGH);
     flag = 0;
@@ -61,7 +61,7 @@ void loop() {
   avviamentoMotore();
   
   pos = 360.0*countA/(imp_giro*riduzione);
-  Serial.print("Posizione: "); Serial.print(pos); Serial.print(", ");Serial.print("Posizione_1: ");Serial.print(pos_1); Serial.print(", ");Serial.print("Posizione_2: ");Serial.print(pos_2);Serial.print(", ");Serial.print("i: ");Serial.println(i);
+  //Serial.print("Posizione: "); Serial.print(pos); Serial.print(", ");Serial.print("Posizione_1: ");Serial.print(pos_1); Serial.print(", ");Serial.print("Posizione_2: ");Serial.print(pos_2);Serial.print(", ");Serial.print("i: ");Serial.println(i);
   if (abs(pos) >= 360){
     countA = 0;
   } 
@@ -72,7 +72,7 @@ void loop() {
     if (pos_1 != pos_2){
     i = 0;
     }
-    if (i == 50){
+    if (i == 100000){
       if (giro == 0){
         fc_sx = pos;
         analogWrite(enA, 0);
@@ -89,7 +89,7 @@ void loop() {
         Serial.print("fc_dx: ");Serial.println(fc_dx);
         digitalWrite(in1, HIGH);
         digitalWrite(in2, LOW);
-        delay(5 000);
+        delay(5000);
         analogWrite(enA, 120);
         i=0;
         giro = 0;

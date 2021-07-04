@@ -43,7 +43,7 @@ BLYNK_WRITE(V4)
 }
 unsigned long myTime;
 float u = 0;
-int riferimento = 0;
+int riferimento = 90;
 BLYNK_WRITE(V1)    
 {
   riferimento = param.asInt();
