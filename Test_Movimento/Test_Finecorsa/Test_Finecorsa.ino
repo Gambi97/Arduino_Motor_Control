@@ -19,7 +19,11 @@ int flag = 1;
 int i = 0;
 void avviamentoMotore(){
   if (flag == 1){ 
+<<<<<<< Updated upstream
     analogWrite(enA, 250);
+=======
+    analogWrite(enA, 100 );
+>>>>>>> Stashed changes
     digitalWrite(in1, LOW);
     digitalWrite(in2, HIGH);
     flag = 0;
